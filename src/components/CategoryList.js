@@ -1,6 +1,8 @@
 import { LitElement, html } from "lit";
 
 class CategoryList extends LitElement {
+  
+  
   static properties = {
     apiUrl: { type: String, attribute: "api-url" },
     apiToken: { type: String, attribute: "api-token" },
@@ -14,6 +16,7 @@ class CategoryList extends LitElement {
     this.error = null;
   }
 
+  
   connectedCallback() {
     super.connectedCallback();
     if (this.apiUrl && this.apiToken) {
@@ -32,24 +35,23 @@ class CategoryList extends LitElement {
         });
     }
   }
-
+  
   createRenderRoot() {
     return this; // pa que aplique Tailwind
   }
 
-
   //agregar para que cuando presione una categoria , muestre sus productos
-
   render() {
     if (this.error) {
       return this.renderError(this.error);
     }
+    
 
     return html`
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         ${this.categories.map(
           (cat) => html`
-            <div class="p-4 bg-gray-100 rounded-lg shadow text-center">
+            <div class="p-4 bg-gray-100 rounded-lg shadow text-center" @click=${() => console.log("hice clck en la categoria", cat)}>
               <h2 class="text-xl font-bold text-gray-700">${cat.title}</h2>
             </div>
           `
@@ -57,6 +59,7 @@ class CategoryList extends LitElement {
       </div>
     `;
   }
+
 
   renderError(error) {
     return html`

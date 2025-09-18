@@ -22,7 +22,7 @@ class ProductosList extends LitElement {
             fetch(this.apiUrl, {
                 headers: {
                     'accept': 'application/json',
-                    'Authorization': 'Bearer ' + this.apiToken
+                    'Authorization': 'Bearer '  + this.apiToken
                 }
             })
             .then(res => res.json())
@@ -43,18 +43,16 @@ class ProductosList extends LitElement {
         if (this.error) {
             return this.renderError(this.error);
         }
-
+       
+        
         return html`
             ${this.products.map(product => {
-                // Multiplicamos product.price x 1000 y le quitamos los decimales
-                const price = Math.floor(product.price * 1000);
-                
                 return html`           
                     <producto-item 
                         title="${product.title}"
                         picture="http://161.35.104.211:8000${product.pictures[0]}"
                         description="${product.description}"
-                        price="${price}">
+                        price="${product.price}">
                     </producto-item>
                 `;
             })}
