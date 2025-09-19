@@ -71,7 +71,6 @@ setCategoryId(categoryId) {
             description="${product.description}"
             price="${product.price}"
           >
-            <a href="">Ir a ficha</a>
           </producto-item>
         `
       )}

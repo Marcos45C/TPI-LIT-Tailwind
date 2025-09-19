@@ -39,6 +39,7 @@ class ProductoItem extends LitElement {
                     <h2 class="text-xl font-bold mb-1">${product.title}</h2>
                     <p class="text-gray-600 mb-2">${product.description}</p>
                     <div class="text-2xl font-semibold text-green-600">$${product.price}</div>
+                    <a href="">Ir a ficha</a>
                 </div>
             </div>
         `;
