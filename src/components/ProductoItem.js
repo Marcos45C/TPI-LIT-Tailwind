@@ -1,24 +1,24 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html } from 'lit';
 
 class ProductoItem extends LitElement {
     static properties = {
         title: { type: String },
         picture: { type: String },
         description: { type: String },
-        price: { type: Number }
+        price:{ type: Number },
     };
 
     constructor() {
         super();
         this.title = 'Título del Producto';
-        this.picture = 'https://via.placeholder.com/150';
+        this.picture = '';
         this.description = 'Descripción del producto';
         this.price = 0;
     }
 
-    static styles = css`
-        @import '/style.css';
-    `;
+    // static styles = css`
+    //     @import '/style.css';
+    // `;
 
     createRenderRoot() {
         return this;
