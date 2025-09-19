@@ -4,36 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="public/logoCenter.png">
     <title>Productos del Supermercado</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 
-<body class="bg-white min-h-screen py-8">
-    <div class="max-w-11/12 mx-auto">
+<body class="bg-red-50 min-h-screen">
+    <div class="max-w-11/12 mx-auto ">
         <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
-            Productos del Supermercado
+            Productos destacados del supermercado
         </h1>
-        
-        <!-- añadir carrito componente -->
-
+        <!--Carrito de compra con clases svg + tailwind-->
+        <cart-widget></cart-widget>
         <category-list
         api-url="http://161.35.104.211:8000/categories/"
-        api-token="div">
+        api-token="div"
+        id="categoryList">
         </category-list>
-
-        <productos-list 
-            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-6"
+      
+        <productos-list class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-6"
             api-url="http://161.35.104.211:8000/products/"
-            api-token="div">
+            api-token="div"
+            id="productosList">
         </productos-list>
 
     </div>
-
     <!-- Importamos el web component -->
     <script   type="module"  src="/src/components/ProductosList.js" ></script>
-
     <script   type="module"  src="/src/components/CategoryList.js" ></script>
+    <script type="module" src="/src/components/CartWidget.js"></script>
 
+    <script>
+        const categoryList = document.getElementById("categoryList");
+        const productosList = document.getElementById("productosList");
+        
+        categoryList.addEventListener("category-selected", (e) => {
+            const categoryId = e.detail.categoryId;
+            productosList.loadByCategory(categoryId);
+        });
+    </script>
 </body>
 
 </html>

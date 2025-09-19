@@ -1,7 +1,8 @@
 import { LitElement, html } from "lit";
-import './ProductosList'
 
 class CategoryList extends LitElement {
+  
+  
   static properties = {
     apiUrl: { type: String, attribute: "api-url" },
     apiToken: { type: String, attribute: "api-token" },
@@ -39,30 +40,28 @@ class CategoryList extends LitElement {
     return this; // pa que aplique Tailwind
   }
 
+  onCategoryClick(cat){  //Dispara la categoría que se seleccionó 
+    this.dispatchEvent(new CustomEvent("category-selected", {
+      detail: {categoryId: cat.id },
+      bubbles:true,
+      composed:true
+    }));
 
-  // funcion para mostrar la categoria apretada y mandarle a productos-list
-  handleClick(cat) {
-  console.log('toque la categoria',cat);
-  const productosList = document.querySelector("productos-list");
-  if (productosList) {
-    productosList.setCategoryId(cat.id);
   }
-}
 
+  //agregar para que cuando presione una categoria , muestre sus productos
   render() {
     if (this.error) {
       return this.renderError(this.error);
     }
-    
-
     return html`
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         ${this.categories.map(
           (cat) => html`
-            <div class="p-4 bg-gray-100 rounded-lg shadow text-center" @click=${() => this.handleClick(cat)}> 
-              <div>
+            <div class="p-4 bg-gray-100 rounded-lg shadow text-center cursor-pointer" 
+            @click=${() => this.onCategoryClick(cat)}>
               <h2 class="text-xl font-bold text-gray-700">${cat.title}</h2>
-              </div>
+            </div>
           `
         )}
       </div>
