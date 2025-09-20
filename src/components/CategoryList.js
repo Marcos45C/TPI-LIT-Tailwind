@@ -58,7 +58,7 @@ class CategoryList extends LitElement {
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         ${this.categories.map(
           (cat) => html`
-            <div class="p-4 bg-gray-100 rounded-lg shadow text-center cursor-pointer" 
+            <div class="p-4 bg-gray-100 rounded-lg shadow text-center transition delay-110 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-red-500" 
             @click=${() => this.onCategoryClick(cat)}>
               <h2 class="text-xl font-bold text-gray-700">${cat.title}</h2>
             </div>

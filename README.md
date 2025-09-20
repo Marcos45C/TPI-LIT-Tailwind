@@ -13,9 +13,10 @@ Frontend de un e-commerce desarrollado con **Lit** y **TailwindCSS**, consumiend
 
 
 ## 👥 Integrantes
-👨‍💻- Marcos Cerezo  
-👨‍💻- Lucas Rodríguez  
-👨‍💻- Yanina Vallejos  
+👨‍💻- Marcos Cerezo <br> 
+👨‍💻- Lucas Rodríguez <br> 
+👨‍💻- Yanina Vallejos <br>
+👨‍💻- Mateo Mazuela
 
 ## 📂 Páginas
 - **index.html** → Home con productos destacados.  

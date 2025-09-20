@@ -36,10 +36,14 @@ class ProductoItem extends LitElement {
 
   return html`
     <div class="max-w-96 shadow-lg bg-gray-100 h-full flex flex-col">
+      <a href="ficha.html?product=${product.id}">
       <img src="${product.picture}" alt="${product.title}" 
            class="aspect-square w-full mix-blend-multiply brightness-110">
+       </a>
       <div class="flex-1 p-3 bg-white flex flex-col justify-between">
+        <a href="ficha.html'product=${product.id}">
         <h2 class="text-xl font-bold mb-1">${product.title}</h2>
+        </a>
         <p class="text-gray-600 mb-2">${product.description}</p>
         <div class="text-2xl font-semibold text-green-600 mb-2">
           $${product.price}

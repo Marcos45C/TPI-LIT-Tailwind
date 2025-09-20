@@ -29,8 +29,8 @@ class ProductosList extends LitElement {
         if(!this.apiUrl || !this.apiToken) return; 
         fetch(url, {
             headers: {
-                'accept': 'application/json',
-                'Authorization':'Bearer ' + this.apiToken
+                accept: 'application/json',
+                Authorization:'Bearer ' + this.apiToken
             }
         })
         .then(res => res.json())
@@ -52,7 +52,7 @@ class ProductosList extends LitElement {
     if (this.error) {
         return this.renderError(this.error);
     }
-
+    //muestra las imágenes de los productos cargadas en la API, en el caso de no encontrarla, muestra el logo de la página. 
     return html`
         ${this.products.map(product => {
             return html`
@@ -61,7 +61,7 @@ class ProductosList extends LitElement {
                     title="${product.title}" 
                     picture="${product.pictures && product.pictures.length > 0 
                         ? `http://161.35.104.211:8000${product.pictures[0]}` 
-                        : 'https://via.placeholder.com/150?text=Sin+Imagen'}" 
+                        : 'public/logoCenter.png'}"  
                     description="${product.description}" 
                     price="${product.price}">
                 </producto-item>
