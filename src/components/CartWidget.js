@@ -5,7 +5,7 @@ class CartWidget extends LitElement {
     count: { type: Number },
     open: {type: Boolean }
   };
-
+///gola
   constructor() {
     super();
     this.count = 0;

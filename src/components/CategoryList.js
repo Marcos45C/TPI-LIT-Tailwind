@@ -14,7 +14,6 @@ class CategoryList extends LitElement {
     this.categories = [];
     this.error = null;
   }
-
   
   connectedCallback() {
     super.connectedCallback();
@@ -38,8 +37,6 @@ class CategoryList extends LitElement {
   createRenderRoot() {
     return this; // pa que aplique Tailwind
   }
-
-
   // funcion para mostrar la categoria apretada y mandarle a productos-list
   handleClick(cat) {
   console.log('toque la categoria',cat);
@@ -68,7 +65,6 @@ class CategoryList extends LitElement {
       </div>
     `;
   }
-
 
   renderError(error) {
     return html`

@@ -7,7 +7,7 @@ static properties = {
     apiToken: { type: String, attribute: "api-token" },
     products: { type: Array, state: true },
     error: { type: Object, state: true },
-    categoryId: { type: Number, state: true }, //
+    categoryId: { type: Number, state: true }, 
 };
 
 constructor() {
