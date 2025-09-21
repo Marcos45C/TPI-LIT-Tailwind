@@ -13,7 +13,6 @@ static properties = {
 constructor() {
     super();
     this.products = []; //trae tods los productos si no se toca categoria
-
     //estos dos son para filtrar segun categoria
     this.categoriaId = null;
     this.producFiltrados = [];// para guardar los productos filtrados 
