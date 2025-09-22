@@ -12,9 +12,9 @@ static properties = {
 
 constructor() {
     super();
-    this.products = []; //trae tods los productos si no se toca categoria
+    this.products = []; //trae todos los productos si no se toca categoria
     //estos dos son para filtrar segun categoria
-    this.categoriaId = null;
+    this.categoryId = null;
     this.producFiltrados = [];// para guardar los productos filtrados 
 }
 
@@ -65,15 +65,25 @@ setCategoryId(categoryId) {
       ${this.producFiltrados.map(
         (product) => html`
           <producto-item
+            .id="${product.id}"
             title="${product.title}"
-            picture="http://161.35.104.211:8000${product.pictures[0]}"
-            description="${product.description}"
+            picture="${product.pictures && product.pictures.length > 0 
+                        ? `http://161.35.104.211:8000${product.pictures[0]}` 
+                        : 'public/logoCenter.png'}" 
             price="${product.price}"
+            @add-to-cart=${(e) => this.addToCart(e.detail.product)}
           >
           </producto-item>
         `
       )}
     `;
+  }
+
+  addToCart(product){
+    const cart = document.querySelector("cart-widget"); 
+    if(cart){
+      cart.addProduct(product);
+    }
   }
 
   renderError(error) {

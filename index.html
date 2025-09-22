@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="public/logoCenter.png">
     <title>Productos del Supermercado</title>
     <link rel="stylesheet" href="/style.css">
 </head>
@@ -14,7 +15,9 @@
             Productos del Supermercado
         </h1>
         
-        <!-- añadir carrito componente -->
+        <cart-widget>
+            
+        </cart-widget>
 
         <category-list
         api-url="http://161.35.104.211:8000/categories/"
@@ -31,9 +34,17 @@
 
     <!-- Importamos el web component -->
     <script   type="module"  src="/src/components/ProductosList.js" ></script>
-
+    <script type="module" src="/src/components/CartWidget.js"></script>
     <script   type="module"  src="/src/components/CategoryList.js" ></script>
-
+    <script>
+        const categoryList = document.getElementById("categoryList");
+        const productosList = document.getElementById("productosList");
+        
+        categoryList.addEventListener("category-selected", (e) => {
+            const categoryId = e.detail.categoryId;
+            productosList.setCategoryId(categoryId);
+        });
+    </script>
 </body>
 
 </html>

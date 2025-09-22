@@ -5,7 +5,7 @@ class CartWidget extends LitElement {
     count: { type: Number },
     open: {type: Boolean }
   };
-///gola
+
   constructor() {
     super();
     this.count = 0;
@@ -157,7 +157,5 @@ totalSum(){
   localStorage.setItem("cart", JSON.stringify([]));
   this.loadCart(); // refresca contador
 }
-}
-//Estaría bueno hacer una opcion de aceptar compra y pida datos del cliente para procesar
-//Pidiendo un user y password, algo así. 
+} 
 customElements.define("cart-widget", CartWidget);
