@@ -65,11 +65,13 @@ class CartWidget extends LitElement {
         </svg>
 
         <!--badge contador -->
+        ${this.count > 0 ? html`
         <span
           class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full
               w-6 h-6 flex items-center justify-center">
           ${this.count}
         </span>
+        ` : ''}
       </button>
     </div>
     ${this.open ? html`
