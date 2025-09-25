@@ -74,7 +74,7 @@ class ProductoFicha extends LitElement {
             $${this.product.price}
           </div>
           <button 
-            class="bg-white text-black px-4 py-2 rounded hover:bg-red-600 hover:text-white transition duration-300"
+            class="bg-white text-black px-4 py-2 rounded border hover:bg-red-600 hover:text-white transition duration-300"
             @click=${() => this.addToCart()}>
             Agregar al carrito
           </button>
