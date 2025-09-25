@@ -32,19 +32,25 @@
 
     </div>
 
-    <!-- Importamos el web component -->
+    <!-- importamos el web component -->
     <script   type="module"  src="/src/components/ProductosList.js" ></script>
     <script type="module" src="/src/components/CartWidget.js"></script>
     <script   type="module"  src="/src/components/CategoryList.js" ></script>
-    <script>
+    
+    <!-- <script>
         const categoryList = document.getElementById("categoryList");
         const productosList = document.getElementById("productosList");
         
         categoryList.addEventListener("category-selected", (e) => {
+                        console.log("Evento recibido:", e); // muestra todo el evento
+                        console.log("Detalle del evento:", e.detail); // muestra solo lo que envía el componente
             const categoryId = e.detail.categoryId;
+                        console.log("ID de la categoría seleccionada:", categoryId);
             productosList.setCategoryId(categoryId);
         });
-    </script>
+        console.log(categoryId);
+        
+    </script> -->
 </body>
 
 </html>
