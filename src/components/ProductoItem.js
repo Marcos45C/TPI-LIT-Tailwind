@@ -44,8 +44,8 @@ class ProductoItem extends LitElement {
 
  render() {
         return html`
-      <div class="max-w-96 shadow-lg bg-gray-100 h-full flex flex-col">
-        <img src="${this.picture}" alt="${this.title}" class="aspect-square w-full mix-blend-multiply brightness-110">
+      <div class="group max-w-96 shadow-lg bg-gray-100 h-full flex flex-col overflow-hidden">
+        <img src="${this.picture}" alt="${this.title}" class="aspect-square w-full mix-blend-multiply brightness-110 transition duration-500 group-hover:scale-105">
         <div class="flex-1 p-3 bg-white flex flex-col justify-between">
             <h2 class="text-xl font-bold mb-1">
              <a href="ficha.html?producto=${this.id}" 
@@ -55,7 +55,7 @@ class ProductoItem extends LitElement {
           <p class="text-gray-500 mb-2">${this.description}</p>
           <div class="text-2xl font-semibold text-green-600">$${this.price}</div>
           <button 
-            class="mt-3 bg-white text-black px-3 py-2 rounded border hover:bg-red-700 hover:text-white transition duration-300"
+            class="mt-3 bg-gray-200 text-black px-3 py-2 rounded hover:bg-red-700 hover:text-white transition duration-300"
             @click=${() => this.addToCart()}>
             Agregar al carrito
           </button>
