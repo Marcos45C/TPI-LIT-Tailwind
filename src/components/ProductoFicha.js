@@ -75,7 +75,12 @@ class ProductoFicha extends LitElement {
           <div class="text-3xl font-semibold text-green-600 mb-6"> <!--diseña el precio, su grosor y color. También su margin y bottom-->
             $${this.product.price}
           </div>
-          
+          <button 
+          {/* el botón blanco con texto negro, redondeado, con la condición de que al pasar el ratón se vuelve rojo con texto blanco */}
+            class="bg-gray-200 text-black px-4 py-2 rounded border-2 border-stone-300 hover:bg-red-600 hover:text-white hover:border-0 transition duration-300"
+            @click=${() => this.addToCart()}> <!--botón para agregar al carrito-->
+            Agregar al carrito
+          </button>
         </div>
       </div>
     `;
