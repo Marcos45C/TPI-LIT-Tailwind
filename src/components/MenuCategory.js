@@ -2,7 +2,7 @@ const API_BASE  = "http://161.35.104.211:8000";
 const API_TOKEN = "div";
 const API_CATS  = `${API_BASE}/categories/`;
 
-// Por cada categoria genero un <a> 
+// Por cada categoria genero un anchor, un item del menu
 function renderCatItem(cat) {
   const name = (cat.title ?? cat.name ?? `Categoría ${cat.id}`).trim();
   return `
@@ -54,7 +54,7 @@ function wireClicks(list, panel) {
     }
   });
 }
-//inyecta categorías en el panel
+//inyecta categorias en el panel
 async function mountCategoriesIntoPanel() {
   const root  = document.getElementById("cat-root");// wrapper del menú
   const panel = document.getElementById("panel-cats");// panel desplegable
