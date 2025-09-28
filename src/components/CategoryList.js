@@ -53,7 +53,7 @@ class CategoryList extends LitElement {
     //esta parte es para aplicar filtros, enviandole a la la funcion que esta en ProductList.js
     const productosList = document.querySelector("productos-list");
     if (productosList) {
-      // al apretar de nuevo la misma categoria (por id) se resetea todos los productos
+      // al apretar de nuevo la misma categoria ,por id, se resetea todos los productos
       if (productosList.categoryId === cat.id) {
         productosList.setCategoryId(null); 
       } else {
@@ -66,11 +66,6 @@ class CategoryList extends LitElement {
     if (this.error) {
       return this.renderError(this.error);
     }
-
-    // animate-ping
-    // animate-bounce
-    // animate-pulse
-    // animate-spin                  <h2 class="text-xl font-bold text-gray-700">${cat.title}</h2>
 
     return html`
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">

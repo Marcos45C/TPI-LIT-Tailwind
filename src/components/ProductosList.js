@@ -38,12 +38,12 @@ connectedCallback() {
     }
 }
 
-  ///para filtrar
+
   // funcion para filtrar
 setCategoryId(categoryId) {
     this.categoryId = categoryId;
     if (!categoryId) {
-      // si no hay categoria , trae todo los productos
+      // si no hay categoria o es null, trae todo los productos
       this.producFiltrados = this.products;
     } else {
       // filtramos con category_id
