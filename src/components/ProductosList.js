@@ -30,27 +30,45 @@ connectedCallback() {
         .then((res) => res.json())
         .then((products) => {
         this.products = products;
-          this.producFiltrados = products; // al inicio muestra todo
+          // this.producFiltrados = products; // al inicio muestra todo //     
+           this.AplicarFiltro(); //  apenas llegan los productos, se vuelve a aplicar el filtro
         })
         .catch((err) => {
         this.error = err;
         });
     }
 }
+    //  aplico el filtro siempre que cambien productos o categoryId
+  AplicarFiltro() {
+    if (!this.categoryId) {
+      this.producFiltrados = this.products;
+    } else {
+      this.producFiltrados = this.products.filter(
+        (i) => i.category_id === this.categoryId
+      );
+    }
+    this.requestUpdate();
+  }
+
+  // al cambiar categoría, también usamos applyFilter
+  setCategoryId(categoryId) {
+    this.categoryId = categoryId;
+    this.AplicarFiltro();
+  }
 
 
   // funcion para filtrar
-setCategoryId(categoryId) {
-    this.categoryId = categoryId;
-    if (!categoryId) {
+// setCategoryId(categoryId) {
+    // this.categoryId = categoryId;
+    // if (!categoryId) {
       // si no hay categoria o es null, trae todo los productos
-      this.producFiltrados = this.products;
-    } else {
+      // this.producFiltrados = this.products;
+    // } else {
       // filtramos con category_id
-      this.producFiltrados = this.products.filter((p) => p.category_id === categoryId);
-    }
-    this.requestUpdate(); // para que  reenderice y traigo los productos filtrados
-  }
+      // this.producFiltrados = this.products.filter((p) => p.category_id === categoryId);
+    // }
+    // this.requestUpdate(); // para que  reenderice y traigo los productos filtrados
+  // }
 
   createRenderRoot() {
     return this;

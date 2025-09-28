@@ -28,7 +28,21 @@ class CategoryList extends LitElement {
         .then((res) => res.json())
         .then((categories) => {
           this.categories = categories;
-        })
+        
+          //aca agrege lo que pedia el enunciado, de entra a una categoria segun su id de categoria, e
+        const params = new URLSearchParams(window.location.search);
+        const categoriaId = params.get("categoria");
+        if (categoriaId) {
+          const catIdNumber = Number(categoriaId);
+          this.selectedCategoryId = catIdNumber;
+          const productosList = document.querySelector("productos-list");
+          if (productosList) {
+            productosList.setCategoryId(catIdNumber);
+            
+          }
+        }
+      })
+      
         .catch((err) => {
           this.error = err;
         });
@@ -42,6 +56,7 @@ class CategoryList extends LitElement {
   // funcion para mostrar la categoria apretada y mandarle a productos-list
   handleClick(cat) {
     console.log("toque la categoria", cat);
+    
     //para aplicar el 'animate-pulse, guardo el id
      // este if es para cuando deselecionas la categoria, para que no quede la animacion activa 
   if (this.selectedCategoryId === cat.id) {
