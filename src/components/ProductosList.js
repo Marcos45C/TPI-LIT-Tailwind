@@ -67,6 +67,7 @@ setCategoryId(categoryId) {
           <producto-item
             .id="${product.id}"
             title="${product.title}"
+            description="${product.description}"
             picture="${product.pictures && product.pictures.length > 0 
                         ? `http://161.35.104.211:8000${product.pictures[0]}` 
                         : 'public/logoCenter.png'}" 
