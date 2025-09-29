@@ -12,7 +12,7 @@
 <body class="bg-white min-h-screen py-8">
     <div class="max-w-11/12 mx-auto">
         <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
-          Productos del Supermercado
+        Supermercado
         </h1>
         
         <!-- pestaña categorias-->
@@ -25,31 +25,21 @@
             <nav id="cats-list" class="flex flex-col"></nav>
           </div>
         </div>
-        <!-- Destacados -->
-        <h2 class="text-xl font-semibold mt-8 mb-4">Destacados</h2>
-        <div id="destacados" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
+
+        <!-- destacados -->
+        <h2 id="h-ofertas" class="text-xl font-semibold mt-8 mb-4">En descuento</h2>
+        <div id="ofertas" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
         <!-- añadir carrito componente -->
 
-        <!--<category-list
-        api-url="http://161.35.104.211:8000/categories/"
-        api-token="div">
-        </category-list> LO DEJE COMENTADO PARA UTILIZAR SOLO EL BOTON QUE HICE PERO NO QUIERO BORRARLO POR SI ACASO - MATEO --> 
-
-        <productos-list 
+      
+        <!-- <productos-list 
             class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-6"
             api-url="http://161.35.104.211:8000/products/"
             api-token="div">
-        </productos-list>
-
+        </productos-list> --> 
     </div>
 
-    <!-- Importamos el web component --> 
-    <script   type="module"  src="/src/components/ProductosList.js" ></script>
-
-    <script   type="module"  src="/src/components/CategoryList.js" ></script>
-
     <script   type="module"  src="/src/components/MenuCategory.js"></script>
-
     <script   type="module"  src="/src/components/Featured.js"></script>
 
 </body>
