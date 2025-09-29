@@ -28,7 +28,21 @@ class CategoryList extends LitElement {
         .then((res) => res.json())
         .then((categories) => {
           this.categories = categories;
-        })
+        
+          //aca agrege lo que pedia el enunciado, de entra a una categoria segun su id de categoria, e
+        const params = new URLSearchParams(window.location.search);
+        const categoriaId = params.get("categoria");
+        if (categoriaId) {
+          const catIdNumber = Number(categoriaId);
+          this.selectedCategoryId = catIdNumber;
+          const productosList = document.querySelector("productos-list");
+          if (productosList) {
+            productosList.setCategoryId(catIdNumber);
+            
+          }
+        }
+      })
+      
         .catch((err) => {
           this.error = err;
         });
@@ -41,11 +55,26 @@ class CategoryList extends LitElement {
 
   // funcion para mostrar la categoria apretada y mandarle a productos-list
   handleClick(cat) {
-    // marco la card para el pulso un instante
-    this.selectedCategoryId = cat?.id ?? null;
-
-    // mando a listado y allA se filtra con grid.setCategoryId(...)
-    window.location.href = `listado.html?categoria=${cat.id}`;
+    console.log("toque la categoria", cat);
+    
+    //para aplicar el 'animate-pulse, guardo el id
+     // este if es para cuando deselecionas la categoria, para que no quede la animacion activa 
+  if (this.selectedCategoryId === cat.id) {
+    this.selectedCategoryId = null;
+  } else {
+    // si presionaste otra categoria, le agrega la anmiacion 
+    this.selectedCategoryId = cat.id;
+  }
+    //esta parte es para aplicar filtros, enviandole a la la funcion que esta en ProductList.js
+    const productosList = document.querySelector("productos-list");
+    if (productosList) {
+      // al apretar de nuevo la misma categoria ,por id, se resetea todos los productos
+      if (productosList.categoryId === cat.id) {
+        productosList.setCategoryId(null); 
+      } else {
+        productosList.setCategoryId(cat.id); // para filtrar por id en setCategoryId que esta en ProductList.js
+      }
+    }
   }
 
   render() {

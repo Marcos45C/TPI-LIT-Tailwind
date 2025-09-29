@@ -9,36 +9,42 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen bg-gray-50">
-  <main class="max-w-7xl mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-3">Productos del Supermercado</h1>
-    <p id="info" class="text-sm text-gray-600 mb-4"></p> <!--muestra la categoria que esta seleccionada -->
-    <!--grilla de productos-->
-    <productos-list
-      id="grid"
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
-      api-url="http://161.35.104.211:8000/products/"
-      api-token="div">
-    </productos-list>
+<body class="bg-white min-h-screen py-8">
+    <div class="max-w-11/12 mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
+            Categorias del Supermercado
+        </h1>
+        
+        <cart-widget>
+            
+        </cart-widget>
+        
+        <category-list
+        api-url="http://161.35.104.211:8000/categories/"
+        api-token="div">
+        </category-list>
 
-  </main>
-  <!--filtro de productos por categoria-->
-  <script type="module">
-  const params = new URLSearchParams(window.location.search); 
-  const catId = Number(params.get("categoria") || "");
-  const grid = document.getElementById("grid");
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
+            Productos del Supermercado
+        </h1>
 
-  if (grid && !Number.isNaN(catId)) {
-    customElements.whenDefined('productos-list').then(() => {
-      grid.setCategoryId(catId);
-      const info = document.getElementById("info");
-      if (info) info.textContent = `Mostrando categoría seleccionada`;
-    });
-  } else {
-    const info = document.getElementById("info");
-    if (info) info.textContent = "Sin categoría seleccionada.";
-  }
-</script>
+        <productos-list 
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-6"
+            api-url="http://161.35.104.211:8000/products/"
+            api-token="div">
+        </productos-list>
+
+        <!-- esto es un componente simple q sirve para scrollear para arriba  -->
+        <scroll-subida></scroll-subida>
+
+    </div>
+
+    
+    <script  type="module"  src="/src/components/ProductosList.js" ></script>
+    <script  type="module" src="/src/components/CartWidget.js"></script>
+    <script  type="module"  src="/src/components/CategoryList.js" ></script>
+    <script  type="module"  src="/src/ScrollSubida.js" ></script>
+    
 
 <script type="module" src="/src/components/ProductoItem.js"></script>
 <script type="module" src="/src/components/ProductosList.js"></script>
