@@ -89,8 +89,12 @@ class CategoryList extends LitElement {
           <a href="listado.html?categoria=${cat.id}" class="block group"
              @click=${(e) => { e.preventDefault(); this.handleClick(cat); }}>
             <div
-              class="p-0 bg-gray-100 rounded-lg shadow text-center transition hover:scale-105 cursor-pointer
-              ${this.selectedCategoryId === cat.id ? "animate-pulse bg-green-50" : ""}">
+              class="p-4 bg-gray-100 rounded-lg shadow text-center transition hover:scale-102 cursor-pointer
+              ${this.selectedCategoryId === cat.id
+                ? "animate-pulse bg-green-50"
+                : ""}"
+              @click=${() => this.handleClick(cat)}
+            >
               <div>
                 <img
                   src="http://161.35.104.211:8000${cat.picture}"
