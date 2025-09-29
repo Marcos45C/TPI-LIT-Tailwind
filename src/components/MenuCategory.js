@@ -6,7 +6,7 @@ const API_CATS  = `${API_BASE}/categories/`;
 function renderCatItem(cat) {
   const name = (cat.title ?? cat.name ?? `Categoría ${cat.id}`).trim();
   return `
-    <a href="#"
+    <a href="listado.html?categoria=${cat.id}"
        data-id="${cat.id}"
        data-name="${name}"
        class="px-3 py-2 rounded-md hover:bg-gray-100 flex items-center justify-between">
@@ -15,6 +15,7 @@ function renderCatItem(cat) {
     </a>
   `;
 }
+
 // trae las categorias desde /categories
 async function fetchCategories() {
   const r = await fetch(API_CATS, {
@@ -33,35 +34,42 @@ async function fetchCategories() {
       title: (c.title ?? c.name ?? "").trim() || `Categoría ${c.id}`,
     }));
 }
+
 // engancha los clics del menú para invocar el filtro de <productos-list>
 function wireClicks(list, panel) {
-  const grid = document.querySelector("productos-list");
+  const grid = document.querySelector("#grid"); // si existe, estoy en listado
   const info = document.getElementById("info");
 
   list.addEventListener("click", (e) => {
     const a = e.target.closest('a[data-id]');
-    if (!a) return;// click fuera de un item
-    e.preventDefault();
+    if (!a) return; // click fuera de un item
+
     const id   = Number(a.dataset.id);
     const name = a.dataset.name || "";
 
     if (grid && !Number.isNaN(id)) {
-      //filtro por category_id que hizo marcos
-      grid.setCategoryId(id);
+      // Estoy en listado.html y filtro en vivo
+      e.preventDefault();
+      grid.setCategoryId(id); // filtro por category_id (reutilizo lo de Marcos)
       if (info) info.textContent = name ? `Mostrando: ${name}` : `Mostrando categoría #${id}`;
       panel.classList.add("hidden"); // oculta panel
-      grid.scrollIntoView({ behavior: "smooth", block: "start" }); //scroll
+      grid.scrollIntoView({ behavior: "smooth", block: "start" }); // scroll
+      return;
     }
+
+    // si no hay #grid (index o ficha), dejo que el <a> navegue a listado.html
   });
 }
-//inyecta categorias en el panel
+
+// inyecta categorias en el panel
 async function mountCategoriesIntoPanel() {
-  const root  = document.getElementById("cat-root");// wrapper del menú
-  const panel = document.getElementById("panel-cats");// panel desplegable
-  const list  = document.getElementById("cats-list");// contenedor de enlaces
-  const btn   = document.getElementById("btn-cats");// botón que abre y cierra
+  const root  = document.getElementById("cat-root"); // wrapper del menu
+  const panel = document.getElementById("panel-cats"); // panel desplegable
+  const list  = document.getElementById("cats-list"); // contenedor de enlaces
+  const btn   = document.getElementById("btn-cats"); // boton que abre y cierra
   if (!root || !panel || !list || !btn) return;
-  //logica del panel
+
+  // logica del panel
   btn.addEventListener("click", (e) => {
     e.stopPropagation();
     panel.classList.toggle("hidden");
@@ -70,7 +78,7 @@ async function mountCategoriesIntoPanel() {
     if (!root.contains(e.target)) panel.classList.add("hidden");
   });
 
-  //estado de carga
+  // estado de carga
   list.innerHTML = `<span class="px-3 py-2 text-sm text-gray-500">Cargando categorías…</span>`;
 
   try {

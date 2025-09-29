@@ -1,4 +1,4 @@
-const API   = "http://161.35.104.211:8000";
+const API = "http://161.35.104.211:8000";
 const TOKEN = "div";
 const MAX_DISCOUNTS = 12;
 
@@ -48,18 +48,22 @@ fetch(`${API}/products/`, {
     }
     //HTML 
     box.innerHTML = ofertas.map(p => `
-  <article class="bg-white rounded-xl shadow p-3 hover:shadow-md transition">
-    <div class="relative">
-      <img src="${p.img}" alt="${p.title}" class="w-full h-40 object-contain mb-2" />
-      <span class="absolute top-2 left-2 text-[10px] px-2 py-1 bg-yellow-300 rounded font-semibold">
+    <article
+      class="bg-white rounded-xl shadow p-3 hover:shadow-md transition cursor-pointer"
+      onclick="location.href='ficha.html?producto=${p.id}'"
+      role="link" tabindex="0"
+      onkeydown="if(event.key==='Enter'){location.href='ficha.html?producto=${p.id}'}">
+      <div class="relative">
+        <img src="${p.img}" alt="${p.title}" class="w-full h-40 object-contain mb-2" />
+        <span class="absolute top-2 left-2 text-[10px] px-2 py-1 bg-yellow-300 rounded font-semibold">
           Descuento
-          </span>
-        </div>
-        <h3 class="font-semibold text-gray-800">${p.title}</h3>
-        ${p.price != null ? `<p class="text-emerald-600 font-bold">$${p.price}</p>` : ``}
-        <a class="text-sm text-blue-600 hover:underline" href="ficha.html?producto=${p.id}">Ir a ficha</a>
-      </article>
-    `).join("");
+        </span>
+      </div>
+      <h3 class="font-semibold text-gray-800">${p.title}</h3>
+      ${p.price != null ? `<p class="text-emerald-600 font-bold">$${p.price}</p>` : ``}
+      <a class="text-sm text-blue-600 hover:underline" href="ficha.html?producto=${p.id}">Ir a ficha</a>
+    </article>
+`).join("");
 
   })
   .catch(err => {
