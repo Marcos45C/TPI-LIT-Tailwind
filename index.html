@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- cd "ubicacion de la carpeta"
+ npm run dev-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos del Supermercado</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="bg-white min-h-screen py-8">
+    <div class="max-w-11/12 mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
+        Supermercado
+        </h1>
+        
+        <!-- pestaña categorias-->
+        <div class="relative inline-block mb-4" id="cat-root">
+          <button id="btn-cats" class="flex items-center gap-2 px-3 py-2 rounded-md bg-sky-600 text-white shadow hover:bg-sky-700">
+            <img src="https://static-api.laanonima.com.ar/imagenes/2025/svg/icono-categorias-blanco.svg" alt="" class="w-5 h-5 select-none" aria-hidden="true">
+            <span class="font-semibold">Categorias</span>
+          </button>
+          <div id="panel-cats" class="hidden absolute left-0 mt-2 w-80 rounded-xl bg-white shadow-lg ring-1 ring-black/5 p-2 z-50">
+            <nav id="cats-list" class="flex flex-col"></nav>
+          </div>
+        </div>
+
+        <!-- destacados -->
+        <h2 id="h-ofertas" class="text-xl font-semibold mt-8 mb-4">En descuento</h2>
+        <div id="ofertas" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
+        <!-- añadir carrito componente -->
+
+      
+        <!-- <productos-list 
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-6"
+            api-url="http://161.35.104.211:8000/products/"
+            api-token="div">
+        </productos-list> --> 
+    </div>
+
+    <script   type="module"  src="/src/components/MenuCategory.js"></script>
+    <script   type="module"  src="/src/components/Featured.js"></script>
+
+</body>
+
+</html>
