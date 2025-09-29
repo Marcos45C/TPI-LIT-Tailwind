@@ -12,17 +12,21 @@
 <body class="bg-white min-h-screen py-8">
     <div class="max-w-11/12 mx-auto">
         <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
-            Productos del Supermercado
+            Categorias del Supermercado
         </h1>
         
         <cart-widget>
             
         </cart-widget>
-
+        
         <category-list
         api-url="http://161.35.104.211:8000/categories/"
         api-token="div">
         </category-list>
+
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
+            Productos del Supermercado
+        </h1>
 
         <productos-list 
             class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-6"
@@ -30,7 +34,7 @@
             api-token="div">
         </productos-list>
 
-
+        <!-- esto es un componente simple q sirve para scrollear para arriba  -->
         <scroll-subida></scroll-subida>
 
     </div>
