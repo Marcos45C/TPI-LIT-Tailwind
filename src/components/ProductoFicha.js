@@ -65,19 +65,21 @@ class ProductoFicha extends LitElement {
     <!--Es la plantilla del producto invocado, con sus estilos de tailwind css-->
    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
         <img 
-          src="http://161.35.104.211:8000${this.product.pictures[0]}" 
+          src="${this.product.pictures && this.product.pictures.length > 0
+            ?`http://161.35.104.211:8000${this.product.pictures[0]}`
+            : '/public/logoCenter.png'}"
           alt="${this.product.title}" 
-          class="w-full h-64 object-contain p-4"
-        />
+          class="w-full h-64 brightness-110 object-contain"/><!--fondo blanco para logos-->
         <div class="p-6">
           <h2 class="text-2xl font-bold mb-2">${this.product.title}</h2>
           <p class="text-gray-600 mb-4">${this.product.description}</p> <!--descripción color gris además del margenes que va a tener-->
           <div class="text-3xl font-semibold text-green-600 mb-6"> <!--diseña el precio, su grosor y color. También su margin y bottom-->
             $${this.product.price}
           </div>
+          <div class="mt-6 flex justify-center">
           <button 
           {/* el botón blanco con texto negro, redondeado, con la condición de que al pasar el ratón se vuelve rojo con texto blanco */}
-            class="bg-gray-200 text-black px-4 py-2 rounded border-2 border-stone-300 hover:bg-red-600 hover:text-white hover:border-0 transition duration-300"
+            class="w-full max-w-xs bg-gray-200 text-black px-4 py-2 rounded border-2 border-stone-300 hover:bg-red-600 hover:text-white hover:border-0 transition duration-300"
             @click=${() => this.addToCart()}> <!--botón para agregar al carrito-->
             Agregar al carrito
           </button>
