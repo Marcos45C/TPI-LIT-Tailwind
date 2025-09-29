@@ -86,8 +86,6 @@ class CategoryList extends LitElement {
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         ${this.categories.map((cat) => html`
           <!-- Envolvemos cada tarjeta en <a> por accesibilidad y backup si falla JS -->
-          <a href="listado.html?categoria=${cat.id}" class="block group"
-             @click=${(e) => { e.preventDefault(); this.handleClick(cat); }}>
             <div
               class="p-4 bg-gray-100 rounded-lg shadow text-center transition hover:scale-102 cursor-pointer
               ${this.selectedCategoryId === cat.id
