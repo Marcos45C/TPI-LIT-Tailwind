@@ -86,7 +86,7 @@ class CategoryList extends LitElement {
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         ${this.categories.map((cat) => html`
             <div
-              class="p-4 bg-gray-100 rounded-lg shadow text-center transition hover:scale-102 cursor-pointer
+              class="p-0 bg-gray-100 rounded-lg shadow text-center transition hover:scale-105 cursor-pointer
               ${this.selectedCategoryId === cat.id
                 ? "animate-pulse bg-green-50"
                 : ""}"
