@@ -43,7 +43,7 @@ body {
 
 
 .hover-scroll::-webkit-scrollbar {
-  height: 6px;
+  height: 12px;
   background: transparent; 
 }
 .hover-scroll:hover::-webkit-scrollbar {
@@ -51,7 +51,7 @@ body {
 }
 .hover-scroll::-webkit-scrollbar-thumb {
   background: transparent;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 .hover-scroll:hover::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.3);
