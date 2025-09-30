@@ -15,26 +15,27 @@
             Categorias del Supermercado
         </h1>
         
-        <cart-widget>
-            
-        </cart-widget>
+        <!-- componente para el carrito  -->
+        <cart-widget></cart-widget>
         
+        <!-- componente que trae las categorias  -->
         <category-list
         api-url="http://161.35.104.211:8000/categories/"
         api-token="div">
         </category-list>
-
+        
+        
         <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
             Productos del Supermercado
         </h1>
-
+        <!-- componentes que trae los productos -->
         <productos-list 
             class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-6"
             api-url="http://161.35.104.211:8000/products/"
             api-token="div">
         </productos-list>
 
-        <!-- esto es un componente simple q sirve para scrollear para arriba  -->
+        <!-- esto es un componente simple q sirve para scrollear hasta arriba  -->
         <scroll-subida></scroll-subida>
 
     </div>
@@ -44,10 +45,8 @@
     <script  type="module" src="/src/components/CartWidget.js"></script>
     <script  type="module"  src="/src/components/CategoryList.js" ></script>
     <script  type="module"  src="/src/ScrollSubida.js" ></script>
-    
+    <script type="module" src="/src/components/ProductoItem.js"></script>
 
-<script type="module" src="/src/components/ProductoItem.js"></script>
-<script type="module" src="/src/components/ProductosList.js"></script>
 
 </body>
 </html>
