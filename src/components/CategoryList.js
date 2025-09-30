@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, css } from "lit";
 
 class CategoryList extends LitElement {
   static properties = {
@@ -83,10 +83,10 @@ class CategoryList extends LitElement {
     }
 
     return html`
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="w-full hover-scroll flex space-x-4">
         ${this.categories.map((cat) => html`
             <div
-              class="p-0 bg-gray-100 rounded-lg shadow text-center transition hover:scale-105 cursor-pointer
+              class="min-w-[200px] p-0 bg-gray-100 rounded-lg shadow text-center transition hover:scale-105 cursor-pointer
               ${this.selectedCategoryId === cat.id
                 ? "animate-pulse bg-green-50"
                 : ""}"
