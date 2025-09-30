@@ -29,3 +29,30 @@ body {
     background-color: #ffffff;
   }
 }
+
+
+/* ////// */
+/*para el contenedor del carrucel */
+.hover-scroll {
+  overflow-x: auto;
+  /* con esto oculta la molesta barra del ejer y  */
+  overflow-y: hidden; 
+  /* tuve que agregar esto porque sino hacia que los demas componentes salten cuando aparecia el scrooll */
+  scrollbar-gutter: stable; 
+}
+
+
+.hover-scroll::-webkit-scrollbar {
+  height: 6px;
+  background: transparent; 
+}
+.hover-scroll:hover::-webkit-scrollbar {
+  background: rgba(0, 0, 0, 0.05); /* se nota en hover */
+}
+.hover-scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+}
+.hover-scroll:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+}
