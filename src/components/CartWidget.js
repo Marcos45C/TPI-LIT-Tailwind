@@ -175,10 +175,7 @@ removeItem(id){ //elimina producto
   cart = cart.filter(item => item.id !=id);
   this.saveCart(cart);
 }
- clearCart() {
-  localStorage.setItem("cart", JSON.stringify([]));
-  this.loadCart(); // refresca contador
-}
+
 totalSum(){
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
