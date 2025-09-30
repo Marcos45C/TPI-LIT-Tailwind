@@ -80,12 +80,18 @@ class CartWidget extends LitElement {
           Total: $${this.totalSum()}
         </div>
         <!--Boton pagar, recarga la pagina-->
-        <div class="mt-6 flex justify-center">
+        <div class="mt-6 flex justify-center gap-4">
         <button 
-          class="w-full max-w-xs mx-4 bg-red-700 text-white px-30 py-2 rounded hover:bg-red-600"
+          class="w-full max-w-xs bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600"
           @click=${() => location.reload()}> 
           Pagar
         </button>
+        <!--boton vaciar carrito-->
+        <button 
+       class="w-full max-w-xs bg-red-700 text-white px-3 py-2 rounded hover:bg-red-600"
+        @click=${() => this.clearCart()}> 
+       Vaciar carrito
+       </button>
       </div>
   ` : ''}
 `;
@@ -163,7 +169,10 @@ removeItem(id){ //elimina producto
   cart = cart.filter(item => item.id !=id);
   this.saveCart(cart);
 }
-
+ clearCart() {
+  localStorage.setItem("cart", JSON.stringify([]));
+  this.loadCart(); // refresca contador
+}
 totalSum(){
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
