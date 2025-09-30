@@ -99,6 +99,7 @@ class CartWidget extends LitElement {
         Pagar
       </button>
       </div>
+    </div>
   ` : ''}
 `;
 }
