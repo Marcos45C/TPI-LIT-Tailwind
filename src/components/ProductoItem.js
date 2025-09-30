@@ -72,7 +72,6 @@ class ProductoItem extends LitElement {
           </h2>
 
           <p class="text-gray-500 mb-2">${this.description}</p>
-
           ${
             (this.salePrice != null)
               ? html`
@@ -86,6 +85,11 @@ class ProductoItem extends LitElement {
 
           <button
             class="mt-3 bg-white text-black px-3 py-2 rounded border hover:bg-red-700 hover:text-white transition duration-300"
+
+          //<div class="text-2xl font-semibold text-green-600">$${this.price}</div>
+          //<button 
+            //class="mt-3 bg-gray-200 text-black px-3 py-2 rounded border-1 border-stone-300 hover:bg-red-700 hover:text-white hover:border-0 transition duration-300"
+            
             @click=${() => this.addToCart()}>
             Agregar al carrito
           </button>
