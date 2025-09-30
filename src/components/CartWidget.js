@@ -73,23 +73,34 @@ class CartWidget extends LitElement {
       </button>
     </div>
     ${this.open ? html`
-  <div class="fixed top-0 right-0 w-80 h-full bg-white shadow-lg p-4 overflow-y-auto z-40">
-    <h2 class="text-lg font-bold mb-4">Carrito</h2>
-
-    ${this.renderCartItems()}
-
-    <!--Muestra el total de los productos en el carrito-->
-    <div class="mt-4 text-right text-xl font-bold text-gray-700">
-      Total: $${this.totalSum()}
+      <div class="fixed top-0 right-0 w-[90vw] max-w-sm h-full bg-white shadow-lg p-4 overflow-y-auto z-40">
+        <h2 class="text-lg font-bold mb-4 mt-10">Carrito</h2>
+        ${this.renderCartItems()}
+        <!--Muestra el total de los productos en el carrito-->
+        <div class="mt-4 text-right text-xl font-bold text-gray-700">
+          Total: $${this.totalSum()}
+        </div>
+        <!--Boton pagar, recarga la pagina-->
+        <div class="mt-6 flex justify-center gap-2">
+        <button 
+          class="w-full max-w-xs bg-red-700 text-white px-4 py-2 rounded hover:bg-green-600"
+          @click=${() => location.reload()}> 
+          Pagar
+        </button>
+        <!--boton vaciar carrito-->
+        <button 
+       class="w-full max-w-xs bg-red-700 text-white px-3 py-2 rounded hover:bg-red-600 flex items-center justify-center gap-2"
+        @click=${() => this.clearCart()}> 
+        <!--idea de yanina usar svg para agregar el icono del tacho-->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="2" stroke="currentColor" class="w-5 h-5">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+  </svg>
+  Vaciar carrito
+       </button>
+      </div>
     </div>
-
-    <!--Limpia/borra todos los productos en el carrito--> 
-    <button 
-      class="mt-4 bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700"
-      @click=${() => this.clearCart()}> 
-      Vaciar carrito
-    </button>
-  </div>
   ` : ''}
 `;
 }
@@ -103,10 +114,23 @@ class CartWidget extends LitElement {
   return html`
     <ul>
       ${cart.map(item => html`
-        <li class="flex justify-between items-center mb-2">
-          <div>
-            <span class="font-medium">${item.title}</span>
-            <span class="text-sm text-gray-500">(x${item.quantity})</span>
+        <li class="flex flex-row items-start justify-between gap-4 border-b pb-4">
+         <!--IMG, TITULO, PRECIO UNIT, ELIMINAR--> 
+         <div class= "flex items-center gap-4">
+            <img src="${item.picture}" alt="${item.title}" class="w-16 h-16 object-contai rounded"/>
+            <div>
+             <div class="font-semibold text-gray-800">${item.title}</div>
+             <div class="text-sm text-gray-500">$${item.price}</div>
+             <!--botón para eliminar producto-->
+             <button @click=${() => this.removeItem(item.id)} 
+               class="text-gray-500 hover:text-red-600 mt-1" title="Eliminar">
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+               </svg>
+             </button>
+            </div>
           </div>
 
           <div class="flex items-center gap-2">
@@ -153,12 +177,16 @@ totalSum(){
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 }
-    clearCart() {
-  localStorage.setItem("cart", JSON.stringify([]));
+//fusioné mi clearCart con el que subió Yanina hace un rato
+ clearCart() {
+  localStorage.setItem("cart", JSON.stringify([])); //mantiene la clave con [] (ma seguro)
   this.loadCart(); // refresca contador
+  this.open = false; //cierra el sidebar
 }
-
+totalSum(){
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 }
-//Estaría bueno hacer una opcion de aceptar compra y pida datos del cliente para procesar
-//Pidiendo un user y password, algo así. 
+    
+} 
 customElements.define("cart-widget", CartWidget);
