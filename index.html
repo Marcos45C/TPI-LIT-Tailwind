@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="public/logoCenter.png">
     <title>Productos del Supermercado</title>
+    <link rel="icon" type="image/png" href="public/logoCenter.png">
     <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -14,6 +15,7 @@
         <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
             Productos destacados del supermercado
         </h1>
+<<<<<<< Updated upstream
         <!--Carrito de compra con clases svg + tailwind-->
         <cart-widget></cart-widget>
         <category-list
@@ -21,6 +23,25 @@
         api-token="div"
         id="categoryList">
         </category-list>
+=======
+        
+        <!-- pestaña categorias-->
+        <div class="relative inline-block mb-4" id="cat-root">
+          <button id="btn-cats" class="flex items-center gap-2 px-3 py-2 rounded-md bg-red-600 text-white shadow hover:bg-red-700">
+            <img src="https://static-api.laanonima.com.ar/imagenes/2025/svg/icono-categorias-blanco.svg" alt="" class="w-5 h-5 select-none" aria-hidden="true">
+            <span class="font-semibold">Categorias</span>
+          </button>
+          <div id="panel-cats" class="hidden absolute left-0 mt-2 w-80 rounded-xl bg-white shadow-lg ring-1 ring-black/5 p-2 z-50">
+            <nav id="cats-list" class="flex flex-col"></nav>
+          </div>
+        </div>
+
+        <!-- destacados -->
+        <h2 id="h-ofertas" class="text-xl font-semibold mt-8 mb-4">En descuento</h2>
+        <div id="ofertas" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"></div>
+        <!-- añadir carrito componente -->
+        <cart-widget></cart-widget>
+>>>>>>> Stashed changes
       
         <productos-list class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-6"
             api-url="http://161.35.104.211:8000/products/"
@@ -34,6 +55,7 @@
     <script   type="module"  src="/src/components/CategoryList.js" ></script>
     <script type="module" src="/src/components/CartWidget.js"></script>
 
+<<<<<<< Updated upstream
     <script>
         const categoryList = document.getElementById("categoryList");
         const productosList = document.getElementById("productosList");
@@ -43,6 +65,12 @@
             productosList.loadByCategory(categoryId);
         });
     </script>
+=======
+    <script   type="module"  src="/src/components/MenuCategory.js"></script>
+    <script   type="module"  src="/src/components/Featured.js"></script>
+    <script type="module"   src="/src/components/CartWidget"></script>
+
+>>>>>>> Stashed changes
 </body>
 
 </html>
