@@ -8,13 +8,42 @@
   <link rel="stylesheet" href="/style.css" />
 </head>
 
-<body class="bg-white min-h-screen py-8">
-  <div class="max-w-11/12 mx-auto">
-    <h1 class="text-3xl font-bold text-center mb-2 text-gray-800">
-      Categorias del Supermercado
-    </h1>
-    <p id="info" class="text-sm text-gray-600 text-center mb-6"></p>
-    <cart-widget></cart-widget>
+<body class="bg-white min-h-screen pb-8 flex flex-col">
+    <!--Vuelve al tocar el logo o el nombre-->
+    <header class="w-full bg-red-800 text-gray-100 px-6 py-4 shadow-md">
+        <a href="index.html" class="inline-flex items-center gap-3 hover:brightness-110 hover:scale-101 transition">
+            <img src="public/logoCenter.png" alt="CenterFamily" class="w-10 h-10 object-contain"/>
+            <span class="text-2xl font-bold">CenterFamily</span>
+        </a>
+    </header>
+    <div class="max-w-11/12 mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
+            Categorias del Supermercado
+        </h1>
+        
+        <!-- componente para el carrito  -->
+        <cart-widget></cart-widget>
+        
+        <!-- componente que trae las categorias  -->
+        <category-list
+        api-url="http://161.35.104.211:8000/categories/"
+        api-token="div">
+        </category-list>
+        
+        <br>
+        
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
+            Productos del Supermercado
+        </h1>
+        <!-- componentes que trae los productos -->
+        <productos-list 
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-6"
+            api-url="http://161.35.104.211:8000/products/"
+            api-token="div">
+        </productos-list>
+
+        <!-- esto es un componente simple q sirve para scrollear hasta arriba  -->
+        <scroll-subida></scroll-subida>
 
     <!-- pestaña categorias-->
         <div class="relative inline-block mb-4" id="cat-root">

@@ -79,14 +79,27 @@ class CartWidget extends LitElement {
         <div class="mt-4 text-right text-xl font-bold text-gray-700">
           Total: $${this.totalSum()}
         </div>
-        <!--Boton pagar, recarga la pagina-->
-        <div class="mt-6 flex justify-center">
+        <!--Boton vaciar carrito-->
+        <div class="mt-6 flex justify-between gap-2">
         <button 
-          class="w-full max-w-xs mx-4 bg-red-700 text-white px-30 py-2 rounded hover:bg-red-600"
-          @click=${() => location.reload()}> 
-          Pagar
-        </button>
+         class="w-full max-w-xs mx-2 bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600 flex items-center justify-center"
+          @click=${() => this.clearCart()}>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+       stroke-width="2" stroke="currentColor" class="w-5 h-5">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+  </svg>
+  Vaciar carrito
+
+       </button>
+       <!--Boton pagar, recarga la pagina-->
+       <button
+        class="w-full max-w-xs mx-2 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-600"
+        @click=${() => location.reload()}> 
+        Pagar
+      </button>
       </div>
+    </div>
   ` : ''}
 `;
 }
@@ -168,6 +181,10 @@ totalSum(){
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   return cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 }
-    
+clearCart() {//vacia carrito
+  localStorage.removeItem("cart");
+  this.loadCart();
+  this.open = false;
+}
 } 
 customElements.define("cart-widget", CartWidget);
