@@ -1,8 +1,10 @@
 import { LitElement, html } from "lit";
 import "./ProductoItem.js";
 
-// palabras para detectar oferta (por si vienen como tag o en el título)
+// palabras para detectar oferta (por si vienen como tag o en el título) // no me se el tag jajaj
 const KWS = ["descuento", "oferta", "promo", "rebaja", "sale"];
+
+// detector de “está en oferta”
 const isDiscount = (p) => {
   const tags = Array.isArray(p?.tags) ? p.tags : [];
   const byTag = tags
@@ -12,22 +14,30 @@ const isDiscount = (p) => {
   return byTag || KWS.some(k => byTitle.includes(k));
 };
 
+//descuento fijo del 10%
+const FIXED_PERCENT = 10;
+const applyFixedDiscount = (price) => {
+  if (typeof price !== "number") return null;
+  return Math.round(price * (1 - FIXED_PERCENT / 100) * 100) / 100;
+};
+
 class ProductosList extends LitElement {
   static properties = {
     apiUrl: { type: String, attribute: "api-url" },
     apiToken: { type: String, attribute: "api-token" },
     products: { type: Array, state: true },
     error: { type: Object, state: true },
-    categoryId: { type: Number, state: true }, 
+    categoryId: { type: Number, state: true },
   };
 
   constructor() {
     super();
     this.products = [];                // trae todos los productos si no se toca categoria
-    // estos dos son para filtrar segun categoria
-    this.categoryId = null;
-    this.producFiltrados = [];         // para guardar los productos filtrados 
+    this.categoryId = null;            // para filtrar segun categoria
+    this.producFiltrados = [];         // guardo los filtrados (ojo con el nombre como lo usabas)
   }
+
+  // handler para el evento del hijo
   handleAddToCart = (e) => {
     this.addToCart(e.detail.product);
   };
@@ -54,22 +64,22 @@ class ProductosList extends LitElement {
 }
     //  aplico el filtro siempre que cambien productos o categoryId
   AplicarFiltro() {
-    if (!this.categoryId) {
-      this.producFiltrados = this.products;
-    } else {
-      this.producFiltrados = this.products.filter(
-        (i) => i.category_id === this.categoryId
-      );
-    }
-    this.requestUpdate();
+  if (this.categoryId == null) {
+    this.producFiltrados = this.products;
+  } else {
+    this.producFiltrados = this.products.filter(
+      (i) => Number(i.category_id) === this.categoryId
+    );
   }
+  this.requestUpdate();
+}
 
   // al cambiar categoría, también usamos applyFilter
   setCategoryId(categoryId) {
-    this.categoryId = categoryId;
-    this.AplicarFiltro();
-  }
-
+  const cid = Number(categoryId);
+  this.categoryId = Number.isNaN(cid) ? null : cid;
+  this.AplicarFiltro();
+}
 
   // funcion para filtrar
 // setCategoryId(categoryId) {
@@ -79,40 +89,47 @@ class ProductosList extends LitElement {
       // this.producFiltrados = this.products;
     // } else {
       // filtramos con category_id
-      // this.producFiltrados = this.products.filter((p) => p.category_id === categoryId);
-    // }
-    // this.requestUpdate(); // para que  reenderice y traigo los productos filtrados
-  // }
-
+  
+     // this.producFiltrados = this.products.filter((p) => Number(p.category_id) === this.categoryId);
+    //}
+    //this.requestUpdate(); //renderiza y traigo los productos filtrados
+  //}
+  
   createRenderRoot() {
-    return this;
+    return this; // para que aplique Tailwind
   }
 
   render() {
-  if (this.error) {
-    return this.renderError(this.error);
+    if (this.error) {
+      return this.renderError(this.error);
+    }
+
+    return html`
+      ${this.producFiltrados.map((product) => {
+        const discountFlag = isDiscount(product);
+        const salePrice = discountFlag ? applyFixedDiscount(product.price) : null;
+
+        return html`
+          <producto-item
+            .id=${product.id}
+            title="${product.title}"
+            description="${product.description}"
+            picture="${(Array.isArray(product.pictures) && product.pictures.length > 0)
+              ? `http://161.35.104.211:8000${product.pictures[0]}`
+              : 'public/logoCenter.png'}"
+            .price=${product.price}
+            .discount=${discountFlag}
+            .salePrice=${salePrice}
+            @add-to-cart=${this.handleAddToCart}
+          ></producto-item>
+        `;
+      })}
+    `;
   }
 
-  return html`
-    ${this.producFiltrados.map((p) => html`
-      <producto-item
-        .id=${p.id}
-        .title=${p.title}
-        .description=${p.description}
-        .picture=${(Array.isArray(p.pictures) && p.pictures.length > 0)
-          ? `http://161.35.104.211:8000${p.pictures[0]}`
-          : 'public/logoCenter.png'}
-        .price=${p.price}
-        .discount=${isDiscount(p)}
-        @add-to-cart=${this.handleAddToCart}></producto-item>
-    `)}
-  `;
-}
-
-
-  addToCart(product){
-    const cart = document.querySelector("cart-widget"); 
-    if(cart){
+  addToCart(product) {
+    const cart = document.querySelector("cart-widget");
+    if (cart) {
       cart.addProduct(product);
     }
   }
@@ -127,4 +144,3 @@ class ProductosList extends LitElement {
 }
 
 customElements.define("productos-list", ProductosList);
-

@@ -8,6 +8,17 @@
     <title>Ficha de producto</title>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- pestaña categorias-->
+        <div class="relative inline-block mb-4" id="cat-root">
+          <button id="btn-cats" class="flex items-center gap-2 px-3 py-2 rounded-md bg-sky-600 text-white shadow hover:bg-sky-700">
+            <img src="https://static-api.laanonima.com.ar/imagenes/2025/svg/icono-categorias-blanco.svg" alt="" class="w-5 h-5 select-none" aria-hidden="true">
+            <span class="font-semibold">Categorias</span>
+          </button>
+          <div id="panel-cats" class="hidden absolute left-0 mt-2 w-80 rounded-xl bg-white shadow-lg ring-1 ring-black/5 p-2 z-50">
+            <nav id="cats-list" class="flex flex-col"></nav>
+          </div>
+        </div>
+  
     <!--Vuelve al tocar el logo o el nombre-->
     <header class="w-full bg-red-800 text-gray-100 px-6 py-4 shadow-md">
         <a href="listado.html" class="inline-flex items-center gap-3 hover:brightness-110 hover:scale-101 transition">
@@ -32,6 +43,6 @@
     <!--Importación del componente-->
     <script type="module" src="/src/components/ProductoFicha.js"></script>
     <script type="module" src="/src/components/CartWidget.js"></script>
-    
+    <script type="module"  src="/src/components/MenuCategory.js"></script>
 </body>
 </html>
