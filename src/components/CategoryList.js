@@ -1,5 +1,4 @@
 import { LitElement, html, css } from "lit";
-import "./ProductosList";
 
 class CategoryList extends LitElement {
   static properties = {
@@ -14,6 +13,7 @@ class CategoryList extends LitElement {
     super();
     this.categories = [];
     this.error = null;
+    this.selectedCategoryId = null;
   }
 
   connectedCallback() {
@@ -50,7 +50,7 @@ class CategoryList extends LitElement {
   }
 
   createRenderRoot() {
-    return this; // pa que aplique Tailwind
+    return this; // pa que aplique Tailwind en el HTML
   }
 
   // funcion para mostrar la categoria apretada y mandarle a productos-list
@@ -83,29 +83,29 @@ class CategoryList extends LitElement {
     }
 
     return html`
-      <div class="w-full hover-scroll flex space-x-4">
-        ${this.categories.map(
-          (cat) => html`
-            <div
-              class="min-w-[200px] p-0 bg-gray-100 rounded-lg shadow text-center transition hover:scale-105 cursor-pointer
-              ${this.selectedCategoryId === cat.id
-                ? "animate-pulse bg-green-50"
-                : ""}"
-              @click=${() => this.handleClick(cat)}
-            >   
-              <div>
-                <img
-                  src="http://161.35.104.211:8000${cat.picture}"
-                  alt="${cat.title}"
-                    class="w-full h-48 object-cover mx-auto mix-blend-multiply brightness-110 mb-0 rounded"
-                />
-              </div>
-              <h2 class="text-xl font-bold text-red-700">${cat.title}</h2>
+    <div class="w-full hover-scroll flex space-x-4 pb-4">
+      ${this.categories.map(
+        (cat) => html`
+          <div
+            class="min-w-[200px] p-0 bg-gray-100 rounded-lg shadow text-center transition cursor-pointer hover:scale-105
+            ${this.selectedCategoryId === cat.id
+              ? "animate-pulse bg-green-50"
+              : ""}"
+            @click=${() => this.handleClick(cat)}
+          >   
+            <div class="transition-transform duration-200 ">
+              <img
+                src="http://161.35.104.211:8000${cat.picture}"
+                alt="${cat.title}"
+                class="w-full h-48 object-cover mx-auto mix-blend-multiply brightness-110 mb-0 rounded"
+              />
             </div>
-          `
-        )}
-      </div>
-    `;
+            <h2 class="text-xl font-bold text-red-700">${cat.title}</h2>
+          </div>
+        `
+      )}
+    </div>
+  `;
   }
 
   renderError(error) {

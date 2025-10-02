@@ -1,32 +1,46 @@
 import { LitElement, html } from "lit";
 import "./ProductoItem.js";
 
+// palabras para detectar oferta (por si vienen como tag o en el título)
+const KWS = ["descuento", "oferta", "promo", "rebaja", "sale"];
+const isDiscount = (p) => {
+  const tags = Array.isArray(p?.tags) ? p.tags : [];
+  const byTag = tags
+    .map(t => (t?.title ?? "").toLowerCase())
+    .some(t => KWS.some(k => t.includes(k)));
+  const byTitle = String(p?.title ?? "").toLowerCase();
+  return byTag || KWS.some(k => byTitle.includes(k));
+};
+
 class ProductosList extends LitElement {
-static properties = {
+  static properties = {
     apiUrl: { type: String, attribute: "api-url" },
     apiToken: { type: String, attribute: "api-token" },
     products: { type: Array, state: true },
     error: { type: Object, state: true },
     categoryId: { type: Number, state: true }, 
-};
+  };
 
-constructor() {
+  constructor() {
     super();
-    this.products = []; //trae todos los productos si no se toca categoria
-    //estos dos son para filtrar segun categoria
+    this.products = [];                // trae todos los productos si no se toca categoria
+    // estos dos son para filtrar segun categoria
     this.categoryId = null;
-    this.producFiltrados = [];// para guardar los productos filtrados 
-}
+    this.producFiltrados = [];         // para guardar los productos filtrados 
+  }
+  handleAddToCart = (e) => {
+    this.addToCart(e.detail.product);
+  };
 
-connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     if (this.apiUrl && this.apiToken) {
       fetch(this.apiUrl, {
         headers: {
-        accept: "application/json",
-        Authorization: "Bearer " + this.apiToken,
+          accept: "application/json",
+          Authorization: "Bearer " + this.apiToken,
         },
-    })
+      })
         .then((res) => res.json())
         .then((products) => {
         this.products = products;
@@ -34,7 +48,7 @@ connectedCallback() {
            this.AplicarFiltro(); //  apenas llegan los productos, se vuelve a aplicar el filtro
         })
         .catch((err) => {
-        this.error = err;
+          this.error = err;
         });
     }
 }
@@ -75,28 +89,26 @@ connectedCallback() {
   }
 
   render() {
-    if (this.error) {
-      return this.renderError(this.error);
-    }
-
-    return html`
-      ${this.producFiltrados.map(
-        (product) => html`
-          <producto-item
-            .id="${product.id}"
-            title="${product.title}"
-            description="${product.description}"
-            picture="${product.pictures && product.pictures.length > 0 
-                        ? `http://161.35.104.211:8000${product.pictures[0]}` 
-                        : 'public/logoCenter.png'}" 
-            price="${product.price}"
-            @add-to-cart=${(e) => this.addToCart(e.detail.product)}
-          >
-          </producto-item>
-        `
-      )}
-    `;
+  if (this.error) {
+    return this.renderError(this.error);
   }
+
+  return html`
+    ${this.producFiltrados.map((p) => html`
+      <producto-item
+        .id=${p.id}
+        .title=${p.title}
+        .description=${p.description}
+        .picture=${(Array.isArray(p.pictures) && p.pictures.length > 0)
+          ? `http://161.35.104.211:8000${p.pictures[0]}`
+          : 'public/logoCenter.png'}
+        .price=${p.price}
+        .discount=${isDiscount(p)}
+        @add-to-cart=${this.handleAddToCart}></producto-item>
+    `)}
+  `;
+}
+
 
   addToCart(product){
     const cart = document.querySelector("cart-widget"); 
@@ -115,3 +127,4 @@ connectedCallback() {
 }
 
 customElements.define("productos-list", ProductosList);
+
